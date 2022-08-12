@@ -12,6 +12,10 @@ const launch = {
 const launches = new Map();
 launches.set(launch.flightNumber, launch);
 
+function getAllLaunches() {
+  return Array.from(launches.values());
+}
+
 module.exports = {
-  launches,
+  getAllLaunches,
 };
