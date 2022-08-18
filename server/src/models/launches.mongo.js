@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const launchesSchema = new mongoose.model({
+const launchesSchema = new mongoose.Schema({
   flightNumber: {
     type: Number,
     required: true,
