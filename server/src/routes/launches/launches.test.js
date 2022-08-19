@@ -14,7 +14,7 @@ describe("Launches API", () => {
   describe("Getting launches", () => {
     it("should respond with 200 OK status code", async () => {
       await request(app)
-        .get("/launches")
+        .get("/v1/launches")
         .expect(200)
         .expect("Content-Type", /application\/json/i);
       // expect(response.status).toBe(200);
@@ -31,7 +31,7 @@ describe("Launches API", () => {
 
     it("should create a launch object and return 201 Created status code", async () => {
       const response = await request(app)
-        .post("/launches")
+        .post("/v1/launches")
         .send(validLaunch)
         .expect(201);
       expect(response.body).toMatchObject({
@@ -45,7 +45,7 @@ describe("Launches API", () => {
       delete invalidLaunch.rocket;
 
       const response = await request(app)
-        .post("/launches")
+        .post("/v1/launches")
         .send(invalidLaunch)
         .expect(400);
 
@@ -58,7 +58,7 @@ describe("Launches API", () => {
       const invalidLaunch = { ...validLaunch, launchDate: "hello" };
 
       const response = await request(app)
-        .post("/launches")
+        .post("/v1/launches")
         .send(invalidLaunch)
         .expect(400);
 
