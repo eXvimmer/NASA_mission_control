@@ -15,10 +15,9 @@ const launch = {
 };
 saveLaunch(launch);
 
-const launches = new Map();
-
-function existsLaunchWithId(id) {
-  return launches.has(id);
+async function existsLaunchWithId(id) {
+  const launch = await Launch.findOne({ flightNumber: id });
+  return !!launch;
 }
 
 async function getLatestFlightNumber() {
@@ -59,12 +58,18 @@ async function scheduleNewLaunch(launch) {
   await saveLaunch(newLaunch);
 }
 
-function abortLaunchById(id) {
-  const aborted = launches.get(id);
-  aborted.upcoming = false;
-  aborted.success = false;
+async function abortLaunchById(id) {
+  const aborted = await Launch.findOneAndUpdate(
+    {
+      flightNumber: id,
+    },
+    {
+      upcoming: false,
+      success: false,
+    }
+  );
 
-  return aborted;
+  return !!aborted;
 }
 
 module.exports = {
