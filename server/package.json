@@ -12,6 +12,9 @@
   },
   "keywords": [],
   "author": "Mustafa Hayati",
+  "jest": {
+    "testEnvironment": "node"
+  },
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
